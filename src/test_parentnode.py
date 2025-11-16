@@ -20,3 +20,25 @@ class TestParentNode(unittest.TestCase):
             parent_node.to_html(),
             "<div><span><b>grandchild</b></span></div>",
         )
+
+    def test_to_html_multiple_children(self):
+        children = [
+            LeafNode(tag="span", value="first"),
+            LeafNode(tag="span", value="second"),
+        ]
+        parent_node = ParentNode("div", children)
+        self.assertEqual(parent_node.to_html(), "<div><span>first</span><span>second</span></div>")
+
+    def test_parent_node_requires_tag(self):
+        child_node = LeafNode(tag="span", value="child")
+        with self.assertRaises(ValueError):
+            ParentNode(None, [child_node])
+
+    def test_parent_node_requires_children(self):
+        with self.assertRaises(ValueError):
+            ParentNode("div", None)
+
+    def test_parent_node_renders_props(self):
+        child_node = LeafNode(tag="span", value="child")
+        parent_node = ParentNode("div", [child_node], props={"class": "wrapper"})
+        self.assertEqual(parent_node.to_html(), '<div class="wrapper"><span>child</span></div>')

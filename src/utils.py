@@ -12,13 +12,13 @@ def text_node_to_html_node(text_node):
             return LeafNode(value=value)
         case TextType.BOLD:
             return LeafNode(tag="b", value=value)
-        case TextNode.ITALIC:
+        case TextType.ITALIC:
             return LeafNode(tag="i", value=value)
-        case TextNode.CODE:
+        case TextType.CODE:
             return LeafNode(tag="code", value=value)
-        case TextNode.LINK:
+        case TextType.LINK:
             return LeafNode(tag="a", value=value, props={"href": url})
-        case TextNode.IMAGE:
-            return LeafNode(tag="img", props={"alt": value, "src": url})
+        case TextType.IMAGE:
+            return LeafNode(tag="img", value="", props={"alt": value, "src": url})
         case _:
             raise ValueError("text node is missing text type")
