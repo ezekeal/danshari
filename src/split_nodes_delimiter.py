@@ -7,7 +7,7 @@ delimiter_type_map = {
 }
 
 
-def split_nodes_delimiter(old_nodes, delimiter, text_type):
+def split_nodes_delimiter(old_nodes, delimiter):
     nodes = []
     for old_node in old_nodes:
         if old_node.text_type != TextType.TEXT or delimiter not in old_node.text:
