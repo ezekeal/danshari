@@ -8,12 +8,12 @@ example_url = "https://www.example.com"
 
 class TestParentNode(unittest.TestCase):
     def test_to_html_with_children(self):
-        child_node = LeafNode("span", "child")
+        child_node = LeafNode(tag="span", value="child")
         parent_node = ParentNode("div", [child_node])
         self.assertEqual(parent_node.to_html(), "<div><span>child</span></div>")
 
     def test_to_html_with_grandchildren(self):
-        grandchild_node = LeafNode("b", "grandchild")
+        grandchild_node = LeafNode(tag="b", value="grandchild")
         child_node = ParentNode("span", [grandchild_node])
         parent_node = ParentNode("div", [child_node])
         self.assertEqual(
