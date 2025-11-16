@@ -1,10 +1,10 @@
 import unittest
 
 from textnode import TextNode, TextType
-from utils import text_node_to_html_node
+from text_node_to_html import text_node_to_html_node
 
 
-class TestUtils(unittest.TestCase):
+class TestTextNodeToHTML(unittest.TestCase):
     def test_text(self):
         node = TextNode(text="This is a text node", text_type=TextType.TEXT)
         html_node = text_node_to_html_node(node)

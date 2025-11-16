@@ -1,4 +1,4 @@
-from textnode import TextNode, TextType
+from textnode import TextType
 from leafnode import LeafNode
 
 
