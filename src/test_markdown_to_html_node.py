@@ -45,7 +45,7 @@ class TestMarkdownToHTMLNode(unittest.TestCase):
 
     def test_heading_block(self):
         node = markdown_to_html_node("# Heading")
-        self.assertEqual(node.to_html(), "<div><h1> Heading</h1></div>")
+        self.assertEqual(node.to_html(), "<div><h1>Heading</h1></div>")
 
     def test_quote_block(self):
         md = dedent(
@@ -57,18 +57,32 @@ class TestMarkdownToHTMLNode(unittest.TestCase):
         node = markdown_to_html_node(md)
         self.assertEqual(
             node.to_html(),
-            "<div><blockquote> Quote line 1\n Quote line 2</blockquote></div>",
+            "<div><blockquote>Quote line 1\nQuote line 2</blockquote></div>",
+        )
+
+    def test_list_with_links(self):
+        md = dedent(
+            """
+            - [First](https://example.com/1)
+            - Item with **bold**
+            """
+        )
+        node = markdown_to_html_node(md)
+        self.assertEqual(
+            node.to_html(),
+            "<div><ul><li><a href=\"https://example.com/1\">First</a></li>"
+            "<li>Item with <b>bold</b></li></ul></div>",
         )
 
 
 class TestTextToChildren(unittest.TestCase):
     def test_heading_child(self):
         node = text_to_children("### Heading text")
-        self.assertEqual(node.to_html(), "<h3> Heading text</h3>")
+        self.assertEqual(node.to_html(), "<h3>Heading text</h3>")
 
     def test_quote_child(self):
         node = text_to_children("> quoted content")
-        self.assertEqual(node.to_html(), "<blockquote> quoted content</blockquote>")
+        self.assertEqual(node.to_html(), "<blockquote>quoted content</blockquote>")
 
     def test_code_child(self):
         node = text_to_children("```\nline one\nline two\n```")
