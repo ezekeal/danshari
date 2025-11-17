@@ -1,9 +1,9 @@
 from textnode import TextNode, TextType
+from copy_static_files import copy_static_files
 
 
 def main():
-    tn = TextNode("text", TextType.CODE, "danshari.org")
-    print(tn)
+    copy_static_files()
 
 
 main()
