@@ -33,3 +33,8 @@ class TestSplitNodesDelimiter(unittest.TestCase):
         node = TextNode("italic text", TextType.ITALIC)
         new_nodes = split_nodes_delimiter([node], "_")
         self.assertEqual(new_nodes, [node])
+
+    def test_split_text_starting_with_delimiter(self):
+        node = TextNode("_italic line_", TextType.TEXT)
+        new_nodes = split_nodes_delimiter([node], "_")
+        self.assertEqual(new_nodes, [TextNode("italic line", TextType.ITALIC)])
