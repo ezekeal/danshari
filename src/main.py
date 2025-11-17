@@ -1,6 +1,5 @@
-from textnode import TextNode, TextType
 from copy_static_files import copy_static_files
-from generate_page import generate_page
+from generate_pages_recursively import generate_pages_recursively
 import os
 import shutil
 
@@ -10,7 +9,7 @@ def main():
     if os.path.exists(public_dir):
         shutil.rmtree(public_dir)
     copy_static_files()
-    generate_page("content/index.md", "template.html", "public/index.html")
+    generate_pages_recursively("content", "template.html", "public")
 
 
 main()
