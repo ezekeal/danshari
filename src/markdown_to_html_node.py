@@ -39,9 +39,11 @@ def text_to_children(text):
             return LeafNode(code_text, tag="blockquote")
         case BlockType.UNORDERED_LIST:
             lines = text.split("\n")
-            lines = list(lambda x: LeafNode(x.strip().slice[2:], tag="li"), lines)
+            lines = list(map(lambda x: LeafNode(x.strip()[2:], tag="li"), lines))
             return ParentNode(tag="ul", children=lines)
         case BlockType.ORDERED_LIST:
             lines = text.split("\n")
-            lines = list(lambda x: LeafNode(x.split(".".strip(), tag="ul")), lines)
+            lines = list(
+                map(lambda x: LeafNode(x.split(".")[1].strip(), tag="li"), lines)
+            )
             return ParentNode(tag="ol", children=lines)

@@ -1,14 +1,6 @@
 import os
 import shutil
 
-# os.path.exists
-# os.listdir
-# os.path.join
-# os.path.isfile
-# os.mkdir
-# shutil.copy
-# shutil.rmtree
-
 
 def copy_static_files():
     # is this all from a relative path?
@@ -16,9 +8,7 @@ def copy_static_files():
     static_dir = "static"
     if not os.path.exists(static_dir):
         os.exit(1)
-    if os.path.exists(public_dir):
-        shutil.rmtree(public_dir)
-    os.mkdir(public_dir)
+    os.makedirs(public_dir)
     copy_folder(static_dir, public_dir)
 
 
