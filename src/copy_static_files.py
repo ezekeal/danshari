@@ -2,10 +2,7 @@ import os
 import shutil
 
 
-def copy_static_files():
-    # is this all from a relative path?
-    public_dir = "public"
-    static_dir = "static"
+def copy_static_files(static_dir="static", public_dir="docs"):
     if not os.path.exists(static_dir):
         os.exit(1)
     os.makedirs(public_dir)

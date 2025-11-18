@@ -3,7 +3,7 @@ from extract_title import extract_title
 import os
 
 
-def generate_page(from_path, template_path, dest_path):
+def generate_page(from_path, template_path, dest_path, basepath):
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
 
     markdown = ""
@@ -16,7 +16,12 @@ def generate_page(from_path, template_path, dest_path):
     html = markdown_to_html_node(markdown).to_html()
     title = extract_title(markdown)
 
-    final_html = template.replace(r"{{ Title }}", title).replace(r"{{ Content }}", html)
+    final_html = (
+        template.replace(r"{{ Title }}", title)
+        .replace(r"{{ Content }}", html)
+        .replace('href="/', f'href="{basepath}')
+        .replace('src="/', f'src="{basepath}')
+    )  # todo there are errors in the HTML
 
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
     with open(dest_path, "w", encoding="utf-8") as f:

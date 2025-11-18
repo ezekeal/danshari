@@ -14,4 +14,9 @@ class LeafNode(HTMLNode):
         if self.tag == None:
             return self.value
         props_html = self.props_to_html()
-        return f"<{self.tag}{props_html}>{self.value}</{self.tag}>"
+        encoded = (
+            self.value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        )
+        if self.tag == "img":
+            return f"<{self.tag}{props_html}>"
+        return f"<{self.tag}{props_html}>{encoded}</{self.tag}>"
