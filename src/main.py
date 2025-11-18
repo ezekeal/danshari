@@ -13,7 +13,7 @@ def main():
     if os.path.exists(public_dir):
         shutil.rmtree(public_dir)
     copy_static_files(static_dir=static_dir, public_dir=public_dir)
-    generate_pages_recursively("content", "template.html", "public", basepath)
+    generate_pages_recursively("content", "template.html", public_dir, basepath)
 
 
 main()
